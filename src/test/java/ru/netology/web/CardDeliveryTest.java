@@ -30,6 +30,7 @@ class RegistrationTest {
         $$("button").find(exactText("Забронировать")).click();
         $(byText("Успешно!")).waitUntil(visible, 15000);
     }
+
 }
 //    public void setDatepicker(String cssCelector, String date) {
 //        $("table[class='calendar__layout']").isDisplayed();
