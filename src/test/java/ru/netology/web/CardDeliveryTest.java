@@ -1,8 +1,10 @@
 package ru.netology.web;
 
+import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -23,18 +25,13 @@ class RegistrationTest {
         String str = format1.format(date.getTime());
         open("http://localhost:9999");
         $("[placeholder='Город']").setValue("Волгоград");
+        $("[placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
         $("[placeholder='Дата встречи']").setValue(str);
         $("[name='name']").setValue("Иванов Иван");
         $("[name='phone']").setValue("+79680000000");
         $("span[class='checkbox__text']").click();
         $$("button").find(exactText("Забронировать")).click();
         $(byText("Успешно!")).waitUntil(visible, 15000);
-    }
-
-    public void setDatepicker(String cssCelector, String date) {
-        $("table[class='calendar__layout']").isDisplayed();
-        JavascriptExecutor.class.cast(???).executeScript(
-                String.format("$('%s').datepicker('setDate', '%s')", cssCelector, date);
     }
 
     @Test
@@ -46,9 +43,9 @@ class RegistrationTest {
 
         open("http://localhost:9999");
         $("[placeholder='Город']").setValue("Вол");
-        $("div[class='popup__inner']").selectOption("Волгоград");
-        $("[placeholder='Дата встречи']");
-        setDatepicker("table[class='calendar__layout']", str);
+        $("div[class='popup popup_direction_bottom-left popup_target_anchor popup_size_m popup_visible popup_height_adaptive popup_theme_alfa-on-white input__popup']").find(byText("Волгоград")).click();
+        $("span[class='input__icon']").click();
+        $("table[class='calendar__layout']").find(str).click();
         $("[name='name']").setValue("Иванов Иван");
         $("[name='phone']").setValue("+79680000000");
         $("span[class='checkbox__text']").click();
