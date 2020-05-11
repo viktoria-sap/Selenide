@@ -31,29 +31,28 @@ class RegistrationTest {
         $(byText("Успешно!")).waitUntil(visible, 15000);
     }
 
+    public void setDatepicker(String cssCelector, String date) {
+        $("table[class='calendar__layout']").isDisplayed();
+        JavascriptExecutor.class.cast(???).executeScript(
+                String.format("$('%s').datepicker('setDate', '%s')", cssCelector, date);
+    }
+
+    @Test
+    void shouldRegisterForDelivery2() {
+        Calendar date = new GregorianCalendar();
+        date.add(Calendar.DAY_OF_YEAR, 7);
+        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
+        String str = format1.format(date.getTime());
+
+        open("http://localhost:9999");
+        $("[placeholder='Город']").setValue("Вол");
+        $("div[class='popup__inner']").selectOption("Волгоград");
+        $("[placeholder='Дата встречи']");
+        setDatepicker("table[class='calendar__layout']", str);
+        $("[name='name']").setValue("Иванов Иван");
+        $("[name='phone']").setValue("+79680000000");
+        $("span[class='checkbox__text']").click();
+        $$("button").find(exactText("Забронировать")).click();
+        $(byText("Успешно!")).waitUntil(visible, 15000);
+    }
 }
-//    public void setDatepicker(String cssCelector, String date) {
-//        $("table[class='calendar__layout']").isDisplayed();
-//        JavascriptExecutor.class.cast(???).executeScript(
-//                String.format("$('%s').datepicker('setDate', '%s')", cssCelector, date);
-//    }
-//
-//    @Test
-//    void shouldRegisterForDelivery2() {
-//        Calendar date = new GregorianCalendar();
-//        date.add(Calendar.DAY_OF_YEAR, 7);
-//        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
-//        String str = format1.format(date.getTime());
-//
-//        open("http://localhost:9999");
-//        $("[placeholder='Город']").setValue("Вол");
-//        $("div[class='popup__inner']").selectOption("Волгоград");
-//        $("[placeholder='Дата встречи']");
-//        setDatepicker("table[class='calendar__layout']", str);
-//        $("[name='name']").setValue("Иванов Иван");
-//        $("[name='phone']").setValue("+79680000000");
-//        $("span[class='checkbox__text']").click();
-//        $$("button").find(exactText("Забронировать")).click();
-//        $(byText("Успешно!")).waitUntil(visible, 15000);
-//    }
-//}
