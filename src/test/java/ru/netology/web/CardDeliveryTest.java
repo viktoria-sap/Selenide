@@ -38,14 +38,14 @@ class RegistrationTest {
     void shouldRegisterForDelivery2() {
         Calendar date = new GregorianCalendar();
         date.add(Calendar.DAY_OF_YEAR, 7);
-        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat format1 = new SimpleDateFormat("dd");
         String str = format1.format(date.getTime());
 
         open("http://localhost:9999");
         $("[placeholder='Город']").setValue("Вол");
         $("div[class='popup popup_direction_bottom-left popup_target_anchor popup_size_m popup_visible popup_height_adaptive popup_theme_alfa-on-white input__popup']").find(byText("Волгоград")).click();
         $("span[class='input__icon']").click();
-        $("table[class='calendar__layout']").find(str).click();
+        $("table[class='calendar__layout']").find(byText(str)).click();
         $("[name='name']").setValue("Иванов Иван");
         $("[name='phone']").setValue("+79680000000");
         $("span[class='checkbox__text']").click();
