@@ -3,7 +3,7 @@ image: Ubuntu1804
 branches:
   only:
     - master
-
+stack: jdk 11
 build: off
 
 install:
